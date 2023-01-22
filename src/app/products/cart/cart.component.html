@@ -1,0 +1,112 @@
+<!-- cart empty -->
+<div class="container mt-5 border p-5" *ngIf="cartitems.length==0">
+    <div class="row text-center">
+        <div class="col mt-3">
+           <img width="500px" src="https://cdn.dribbble.com/users/2046015/screenshots/4591856/media/314560586aef7f1eae694d78a015c69c.gif" alt="cart empty image">
+       <h3>Your cart is empty</h3>
+       <a routerLink="/" class="btn btn-primary mt-3">Shop now</a>
+       
+        </div>
+    </div>
+</div>
+
+
+
+<!-- cart with contents -->
+
+<div class="container mt-5 " *ngIf="cartitems.length!=0">
+    <div class="row">
+        <div class="col mt-5">
+          <table class="table border table table-success table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>name</th>
+                    <th> image</th>
+                    <th>description</th>
+                    <th>price</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of cartitems; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{product.title}}</td>
+                    <td> <img width="100px"height="100px" [src]="product.image" alt="no image"></td>
+                    <td>{{product.description}}</td>
+                    <td>${{product.price}}</td>
+                    <td>
+                       <i (click)="removeItem(product)" class="fa fa-trash text-danger"></i>
+                    </td>
+                </tr>
+                        
+
+            </tbody>
+
+          </table>
+          <div style="float: right;" class="m-3">
+                <button (click)="removeallitems()" class="btn btn-danger">empty cart</button>
+                <a routerLink="/" class="btn btn-primary ms-2">shop more</a>
+                <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">check out</button>
+                <b class="ms-2" >Grand Totel : ${{grantTotal}}</b>
+          </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Check out page</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3>Delivery Address</h3>
+          <form class="border p-2" >
+            <input placeholder="Customer name" type="text" class="form-control mb-2">
+            <input placeholder="Customer Apartment/ flat/House Number" type="text" class="form-control mb-2">
+            <input placeholder="Customer Pincode" type="text" class="form-control mb-2">
+            <input placeholder="Customer Country" type="text" class="form-control mb-2">
+            <input placeholder="Customer Contact Number" type="text" class="form-control mb-2">
+
+
+
+
+          </form>
+          <div [ngSwitch]="grantTotal" class="mt-2 p-2">
+            <h4>Discounts</h4>
+            <span *ngSwitchCase="10.99"><img  width="100px" src="https://tse3.mm.bing.net/th?id=OIP.HjEx1c2jSL7XD1zziJROCgAAAA&pid=Api&P=0" alt="no coupon">
+            </span>
+            <span *ngSwitchCase="100">
+              <img (click)="discount5per()"  width="150px" src="http://www.pngmart.com/files/7/Coupon-PNG-Transparent-HD-Photo.png" alt="no coupon">
+
+            </span>
+            <span *ngSwitchCase="50">
+              <img (click)="discount50per()" width="150px" src="http://www.floridasalestax.com/images/blog/FL-Sales-Tax-on-Coupons.png" alt="no coupon">
+
+            </span>
+            <span *ngSwitchDefault>
+              <img (click)="discount30per()"  width="170px" src="http://www.regionalsupplyblog.com/wp-content/uploads/2014/02/promo-20130306-185440.png" alt="no coupon">
+
+            </span>
+
+
+          </div>
+          <div *ngIf="updatedtotal">
+            <h5>
+              New Total after Discount :  <b class="text-danger text-center">{{updatedtotal}}</b>
+            </h5>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          <button (click)="proceed()" type="button" class="btn btn-success" data-bs-dismiss="model">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </div>

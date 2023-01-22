@@ -1,0 +1,71 @@
+                   E commerse website-
+                   --------------------
+
+               front end- using angular
+
+
+     1: create angular projcet- ng new project-name
+     2: run angular project -ng serve
+     3: add bootsrap, front awsome ,google font in index.html
+     4: lazy load the coomenlt used html pages inside a node_modules
+         ng g m products --route products --module app.module
+     5: add router autlet selector inside the route component html page               
+     6:create component should be lazy loaded in the product module - 
+       all-product - ng g c products/all-products
+       create -ng g c products/cart
+       wishlist - ng g c products/wish-list
+       page not found - ng g c page-not-found
+       header -  ng g c header
+       footer -  ng g c footer
+
+      7: set path for each components 
+        -to redirect from localhost:4200 to specific route
+      8:design the component
+      9:create angular service 
+      10:import httpclient module in products module
+      11:dependancy inject httpclient class in api service ts file
+      12:call api in all product component
+      13:import the product module in app module.ts file
+
+           mongo db
+           ----------
+      9:store all product details in mongodb
+
+
+
+
+           node and express.js
+         ----------------------------  
+
+         create the backend using the -node express js
+
+       1: create a folder for server
+       2: create packege .json file - npm init  
+       3: create index.js file
+       4: install express: npm i express
+       5: import express inside index.js file .cmd:  const express = require('express')
+       6: using express create a server application - const app = express()
+       7: setup the port for server application
+          cmd:app.listen(3000,()=>{
+           console.log('server started at 3000');
+          })
+
+       8: use json parser in server application. cmd:app.use(express.json())
+       9: install cors protocol inside server : npm i cors
+       10:import cors in index.js
+
+       11:use cors specify origin 
+       12:install mongoose to estlablished the connection b/w server and mongodb  :npm i mongoose
+       13:using mongoose estlablished the connection b/w server and mongodb
+           : create a service folder 
+           : create db.js file
+           :import mongoose in db.js file : const mongoose = require('mongoose')
+           :using mongoose define the connection string
+              : mongoose.connect('mongodb://localhost:27017/onlineCart',()=>{
+                 console.log('mongodb connected successfully');
+           })
+
+           :define model for products
+           : export model so it can be used by other file
+
+         14: resolving api in index.js  
